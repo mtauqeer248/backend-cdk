@@ -23,7 +23,12 @@ export class BackendCdkStack extends cdk.Stack {
       name: "project14aEventbridgeAPI",
       schema: appsync.Schema.fromAsset("utils/schema.gql"),
       authorizationConfig: {
-       
+        defaultAuthorization: {
+          authorizationType: appsync.AuthorizationType.API_KEY,     ///Defining Authorization Type
+          apiKeyConfig: {
+            expires: cdk.Expiration.after(cdk.Duration.days(365))   ///set expiration for API Key
+          }
+        },
       },
      
       xrayEnabled: true,
@@ -35,7 +40,7 @@ export class BackendCdkStack extends cdk.Stack {
         type: dynamodb.AttributeType.STRING,
       },
     });
-    const todoTable = api.addDynamoDbDataSource('TodoAppTable', todoTableEvent);
+    const todoTable = api.addDynamoDbDataSource('todoAppTable', todoTableEvent);
 
     const httpEventTriggerDS = api.addHttpDataSource(
       "eventTriggerDS",
@@ -63,7 +68,7 @@ export class BackendCdkStack extends cdk.Stack {
       let details = `\\\"id\\\": \\\"$ctx.args.id\\\"`;
 
       if (mut === 'addTodo') {
-        details =`\\\"id\\\":\\\"$ctx.args.id\\\", \\\"todo\\\":\\\"$ctx.args.todo\\\"`
+        details = `\\\"task\\\":\\\"$ctx.args.todo.task\\\", \\\"done\\\":\\\"$ctx.args.todo.done\\\"`
       } 
   
     httpEventTriggerDS.createResolver({
