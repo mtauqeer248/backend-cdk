@@ -4,21 +4,21 @@ type Event {
 
 type Todo {
 
-  task: String!
-  done: Boolean!
+  task: String
+  done: Boolean
 }
 
 type Query {
-  getTodos: [Todo!]
+  getTodos: [Todo]
 }
 
 input TodoInput {
   
-  task: String!
-  done: Boolean!
+  task: String
+  done: Boolean
 }
 
 type Mutation {
-  addTodo(todo: TodoInput!): Event
-  deleteTodo(id: String!): Event
+  addTodo(todo: TodoInput): Event
+  deleteTodo(id: String): Event
 }
