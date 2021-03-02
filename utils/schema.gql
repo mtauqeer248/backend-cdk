@@ -3,7 +3,7 @@ type Event {
 }
 
 type Todo {
-   id:ID!
+
   task: String!
   done: Boolean!
 }
@@ -13,12 +13,12 @@ type Query {
 }
 
 input TodoInput {
-  id:ID!
+  
   task: String!
   done: Boolean!
 }
 
 type Mutation {
   addTodo(todo: TodoInput!): Event
-  deleteTodo(id: ID!): Event
+  deleteTodo(id: String!): Event
 }
