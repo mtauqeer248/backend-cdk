@@ -1,4 +1,4 @@
-export const EVENT_SOURCE = "Todo App Event"
+export const EVENT_SOURCE = "TodoAppEvent"
 
 export const requestTemplate = (detail:string, detailType:string)=>{
     // "Detail":"{ \\\"event\\\": \\\"$ctx.arguments.timeSlot.from\\\"}",

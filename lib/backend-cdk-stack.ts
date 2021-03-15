@@ -2,7 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as appsync from '@aws-cdk/aws-appsync';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as events from '@aws-cdk/aws-events';
-import * as eventsTargets from '@aws-cdk/aws-events-targets';
+import * as targets from '@aws-cdk/aws-events-targets';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { requestTemplate, responseTemplate, EVENT_SOURCE } from '../utils/appsync-request-responce';
 import * as s3 from '@aws-cdk/aws-s3';
@@ -91,10 +91,10 @@ export class BackendCdkStack extends cdk.Stack {
   todoTableEvent .grantReadWriteData(dynamoHandlerLambda);
 
       new events.Rule(this, "TodoTableRule", {
-        targets:[new eventsTargets.LambdaFunction(dynamoHandlerLambda)],
+        targets:[new targets.LambdaFunction(dynamoHandlerLambda)],
         eventPattern: {
           source: [EVENT_SOURCE],
-          detailType: [...mutations,],
+          detailType: [...mutations]
         },
        
       });
